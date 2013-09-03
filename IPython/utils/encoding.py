@@ -51,6 +51,9 @@ def getdefaultencoding():
             enc = locale.getpreferredencoding()
         except Exception:
             pass
-    return enc or sys.getdefaultencoding()
+    enc = enc or sys.getdefaultencoding()
+    if enc == 'cp0':
+        return 'utf-8'
+    return enc
 
 DEFAULT_ENCODING = getdefaultencoding()
