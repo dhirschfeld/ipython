@@ -52,6 +52,9 @@ def getdefaultencoding():
         except Exception:
             pass
     enc = enc or sys.getdefaultencoding()
+    # On windows `cp0` can be returned to indicate that there is no code page.
+    # Since cp0 is an invalid encoding return instead utf-8 which should at 
+    # least work in any locale
     if enc == 'cp0':
         return 'utf-8'
     return enc
